@@ -1,11 +1,12 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using ParseTry.Collector;
 using ParseTry.DBWorker;
 
 
 namespace ParseTry.MarketParser
 {
-    public class ParserMarket: IDisposable
+    public class ParserMarket : IDisposable
     {
         public HttpClient HttpClient { get; set; }
         public string Url { get; set; } = "https://market.csgo.com/api/v2/prices/class_instance/RUB.json";
@@ -21,18 +22,22 @@ namespace ParseTry.MarketParser
         {
             var data = HttpClient.GetStringAsync(Url).Result;
             JObject.Parse(data).TryGetValue("items", out JToken items);
+            data = null; // очистка
             if (items != null)
             {
-                    foreach (var item in items)
-                    {
-                        ItemMarket skin = JsonConvert.DeserializeObject<ItemMarket>(item.First.ToString()); //Десериализация данных каждого предмета
-                        skin.Id = item.Path; //Использование id предмета в качестве id в представлении БД
-                        skin.url = string.Concat(MarketUrl, item.Path.Split('.')?.Last()?.Replace('_', '-'));
-                        marketItems.Add(skin);
-                    }
+                foreach (var item in items)
+                {
+                    ItemMarket skin = JsonConvert.DeserializeObject<ItemMarket>(item.First.ToString()); //Десериализация данных каждого предмета
+                    skin.Id = item.Path; //Использование id предмета в качестве id в представлении БД
+                    skin.url = string.Concat(MarketUrl, item.Path.Split('.')?.Last()?.Replace('_', '-'));
+                    marketItems.Add(skin);
+                }
+                items = null; // очистка  
             }
             SortItems();
         }
+
+
 
         public void SortItems()
         {
@@ -44,6 +49,8 @@ namespace ParseTry.MarketParser
                 itemsResultSort.Add(newItem);
             }
             SaveItemsToDB(itemsResultSort);
+            itemSort = null; // очистка
+            itemsResultSort = null; // очистка
         }
 
         private static ItemMarket TrasnformItemInfo(IGrouping<string?, ItemMarket> itemsInfo)
@@ -75,10 +82,9 @@ namespace ParseTry.MarketParser
                 DBworker.UpdateDb(dataBase, items);
             }
         }
-
         public void Dispose()
         {
-
+            marketItems = null; // очистка 
         }
     }
 }
