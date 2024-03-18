@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using ParseTry.DBWorker;
+using ParseTry.Main;
 
 namespace ParseTry.BuffParser
 {
@@ -97,14 +98,14 @@ namespace ParseTry.BuffParser
             var SkinInfoToSaveDB = new ItemBuff
             {
                 Id = skinInfo.id,
-                buy_max_price = skinInfo.buy_max_price,
+                buy_max_price = skinInfo.buy_max_price * ValueСurrency.cnyValue,
                 buy_num = skinInfo.buy_num,
                 original_icon_url = skinInfo.goods_info.original_icon_url,
                 steam_price = skinInfo.goods_info.steam_price,
-                steam_price_cny = skinInfo.goods_info.steam_price_cny,
+                steam_price_cny = skinInfo.goods_info.steam_price_cny * ValueСurrency.cnyValue,
                 market_hash_name = skinInfo.market_hash_name,
                 quick_price = skinInfo.quick_price,
-                sell_min_price = skinInfo.sell_min_price,
+                sell_min_price = skinInfo.sell_min_price * ValueСurrency.cnyValue,
                 sell_num = skinInfo.sell_num,
                 steam_market_url = skinInfo.steam_market_url,
                 exterior_localized_name = skinInfo.goods_info.info.tags.exterior?.localized_name,
