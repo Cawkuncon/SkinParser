@@ -17,7 +17,7 @@ namespace ParseTry
 
             CollectorClass.AggressiveCollectAllGen();
 
-            var buffprsr = new ParserBuff(1, 1000, "session=1-RvhomA9t4RqcLTxzCL8_5tWv_4rWsQkHRr1uOXTQ3Kxu2038218285");
+            var buffprsr = new ParserBuff(1, 250, "session=1-RvhomA9t4RqcLTxzCL8_5tWv_4rWsQkHRr1uOXTQ3Kxu2038218285"); // добавить юзер агент, сессия заблочена
             buffprsr.TryParseInitialization();
 
             TransformClass.TransformToResult();
