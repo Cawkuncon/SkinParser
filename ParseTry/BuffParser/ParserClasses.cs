@@ -17,7 +17,7 @@ namespace ParseTry.BuffParser
     public class GoodsInfo
     {
         public Info info { get; set; }
-        public string original_icon_url { get; set; }
+        public string icon_url { get; set; }
         public decimal steam_price { get; set; }
         public decimal steam_price_cny { get; set; }
     }

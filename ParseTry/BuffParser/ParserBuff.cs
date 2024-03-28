@@ -65,6 +65,7 @@ namespace ParseTry.BuffParser
                         }
                     }
                     DBworker.UpdateDb(db, listToSave);
+                    Thread.Sleep(1500);
                 };
             }
         }
@@ -101,7 +102,7 @@ namespace ParseTry.BuffParser
                 Id = skinInfo.id,
                 buy_max_price = skinInfo.buy_max_price * ValueСurrency.cnyValue,
                 buy_num = skinInfo.buy_num,
-                original_icon_url = skinInfo.goods_info.original_icon_url,
+                original_icon_url = skinInfo.goods_info.icon_url,
                 steam_price = skinInfo.goods_info.steam_price,
                 steam_price_cny = skinInfo.goods_info.steam_price_cny * ValueСurrency.cnyValue,
                 market_hash_name = skinInfo.market_hash_name,
