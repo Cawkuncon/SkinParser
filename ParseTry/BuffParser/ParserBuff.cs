@@ -9,7 +9,7 @@ namespace ParseTry.BuffParser
 {
     internal class ParserBuff
     {
-        private HttpClient HttpClient { get; set; }
+        private HttpClient HttpClientUserAg { get; set; }
         private string Session { get; set; }
         private ApplicationContext dataBase { get; set; }
         private Uri uri { get; set; }
@@ -18,15 +18,17 @@ namespace ParseTry.BuffParser
         private decimal minPrice { get; set; }
         private decimal maxPrice { get; set; }
         private int TotalPages { get; set; }
+        private Random random { get; set; }
 
         public ParserBuff(decimal minPrice, decimal maxPrice, string session)
         {
-            HttpClient = new HttpClient();
+            HttpClientInitialization();
+            random = new Random();
             this.maxPrice = maxPrice > minPrice ? maxPrice : minPrice;
             this.minPrice = minPrice < maxPrice ? minPrice : maxPrice;
             Session = session;
             ConcatUrl(100000);
-            HttpClient.DefaultRequestHeaders.Add("cookie", Session);
+            HttpClientUserAg.DefaultRequestHeaders.Add("cookie", Session);
         }
 
         public void TryParseInitialization()
@@ -77,24 +79,19 @@ namespace ParseTry.BuffParser
             {
                 try
                 {
-                    return JObject.Parse(HttpClient.GetStringAsync(uri).Result);
+                    return JObject.Parse(HttpClientUserAg.GetStringAsync(uri).Result);
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine("Ошибка");
                     Console.WriteLine(ex.Message);
                     Console.WriteLine("Ожидание 5 сек");
+                    ChangeRandomUserAgent();
                     Thread.Sleep(5000);
                 }
             }
         }
 
-        private void ConsoleProcents(int i)
-        {
-            Console.Clear();
-            var percents = Math.Round(((double)i / TotalPages) * 100, 2);
-            Console.WriteLine(percents + "%");
-        }
         private ItemBuff MapDeserializedToDataBase(Root skinInfo)
         {
             var SkinInfoToSaveDB = new ItemBuff
@@ -120,6 +117,27 @@ namespace ParseTry.BuffParser
         {
             UrlToParse = string.Concat(Url, page_num, "&min_price=", minPrice, "&max_price=", maxPrice, "&page_size=80");
             uri = new Uri(UrlToParse);
+        }
+        private void ChangeRandomUserAgent()
+        {
+            var randUserAgent = random.Next(UserAgentsClass.userAgents.Count);
+            HttpClientUserAg.DefaultRequestHeaders.Add("User-Agent", UserAgentsClass.userAgents[randUserAgent]);
+        }
+
+        private void ConsoleProcents(int i)
+        {
+            Console.Clear();
+            var percents = Math.Round(((double)i / TotalPages) * 100, 2);
+            Console.WriteLine(percents + "%");
+        }
+
+        private void HttpClientInitialization()
+        {
+            HttpClientUserAg = new HttpClient();
+            HttpClientUserAg.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36 OPR/108.0.0.0");
+            HttpClientUserAg.DefaultRequestHeaders.Add("Accept", @"*/*");
+            HttpClientUserAg.DefaultRequestHeaders.Add("Accept-Encoding", "gzip, deflate, br");
+            HttpClientUserAg.DefaultRequestHeaders.Add("Accept-Language", "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7");
         }
     }
 }
