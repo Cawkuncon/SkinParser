@@ -10,14 +10,14 @@ namespace ParseTry
     {
         static void Main(string[] args)
         {
-            using (var marketParser = new ParserMarket())
-            {
-                marketParser.Parse();
-            }
+            //using (var marketParser = new ParserMarket())
+            //{
+            //    marketParser.Parse();
+            //}
 
-            CollectorClass.AggressiveCollectAllGen();
+            //CollectorClass.AggressiveCollectAllGen();
 
-            var buffprsr = new ParserBuff(1, 250, "session=1-RvhomA9t4RqcLTxzCL8_5tWv_4rWsQkHRr1uOXTQ3Kxu2038218285"); // добавить парсинг курса юаня
+            var buffprsr = new ParserBuff(1, 3, "session=1-JtWI5txpxqjGtRcZjTLaDmSfGs2MictS4IRPyPhLgncV2038218285"); // добавить парсинг курса юаня
             buffprsr.TryParseInitialization();
 
             TransformClass.TransformToResult();

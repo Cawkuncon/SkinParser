@@ -136,7 +136,7 @@ namespace ParseTry.BuffParser
             UserHttpClient = new HttpClient();
             UserHttpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36 OPR/108.0.0.0");
             UserHttpClient.DefaultRequestHeaders.Add("Accept", @"*/*");
-            UserHttpClient.DefaultRequestHeaders.Add("Accept-Encoding", "gzip, deflate, br");
+            UserHttpClient.DefaultRequestHeaders.Add("Accept-Encoding", "*");
             UserHttpClient.DefaultRequestHeaders.Add("Accept-Language", "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7");
         }
     }
