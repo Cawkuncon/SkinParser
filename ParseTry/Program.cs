@@ -3,6 +3,7 @@ using ParseTry.Collector;
 using ParseTry.Main;
 using ParseTry.MarketParser;
 
+
 namespace ParseTry
 {
 
@@ -10,14 +11,14 @@ namespace ParseTry
     {
         static void Main(string[] args)
         {
-            //using (var marketParser = new ParserMarket())
-            //{
-            //    marketParser.Parse();
-            //}
+            using (var marketParser = new ParserMarket())
+            {
+                marketParser.Parse();
+            }
 
-            //CollectorClass.AggressiveCollectAllGen();
+            CollectorClass.AggressiveCollectAllGen();
 
-            var buffprsr = new ParserBuff(1, 3, "session=1-JtWI5txpxqjGtRcZjTLaDmSfGs2MictS4IRPyPhLgncV2038218285"); // добавить парсинг курса юаня
+            var buffprsr = new ParserBuff(1, 2, "session=1-JtWI5txpxqjGtRcZjTLaDmSfGs2MictS4IRPyPhLgncV2038218285"); // добавить парсинг курса юаня
             buffprsr.TryParseInitialization();
 
             TransformClass.TransformToResult();
