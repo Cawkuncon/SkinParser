@@ -9,7 +9,7 @@ namespace ParseTry.BuffParser
 {
     internal class ParserBuff
     {
-        private HttpClient HttpClientUserAg { get; set; }
+        private HttpClient UserHttpClient { get; set; }
         private string Session { get; set; }
         private ApplicationContext dataBase { get; set; }
         private Uri uri { get; set; }
@@ -28,7 +28,7 @@ namespace ParseTry.BuffParser
             this.minPrice = minPrice < maxPrice ? minPrice : maxPrice;
             Session = session;
             ConcatUrl(100000);
-            HttpClientUserAg.DefaultRequestHeaders.Add("cookie", Session);
+            UserHttpClient.DefaultRequestHeaders.Add("cookie", Session);
         }
 
         public void TryParseInitialization()
@@ -79,7 +79,7 @@ namespace ParseTry.BuffParser
             {
                 try
                 {
-                    return JObject.Parse(HttpClientUserAg.GetStringAsync(uri).Result);
+                    return JObject.Parse(UserHttpClient.GetStringAsync(uri).Result);
                 }
                 catch (Exception ex)
                 {
@@ -121,7 +121,7 @@ namespace ParseTry.BuffParser
         private void ChangeRandomUserAgent()
         {
             var randUserAgent = random.Next(UserAgentsClass.userAgents.Count);
-            HttpClientUserAg.DefaultRequestHeaders.Add("User-Agent", UserAgentsClass.userAgents[randUserAgent]);
+            UserHttpClient.DefaultRequestHeaders.Add("User-Agent", UserAgentsClass.userAgents[randUserAgent]);
         }
 
         private void ConsoleProcents(int i)
@@ -133,11 +133,11 @@ namespace ParseTry.BuffParser
 
         private void HttpClientInitialization()
         {
-            HttpClientUserAg = new HttpClient();
-            HttpClientUserAg.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36 OPR/108.0.0.0");
-            HttpClientUserAg.DefaultRequestHeaders.Add("Accept", @"*/*");
-            HttpClientUserAg.DefaultRequestHeaders.Add("Accept-Encoding", "gzip, deflate, br");
-            HttpClientUserAg.DefaultRequestHeaders.Add("Accept-Language", "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7");
+            UserHttpClient = new HttpClient();
+            UserHttpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36 OPR/108.0.0.0");
+            UserHttpClient.DefaultRequestHeaders.Add("Accept", @"*/*");
+            UserHttpClient.DefaultRequestHeaders.Add("Accept-Encoding", "gzip, deflate, br");
+            UserHttpClient.DefaultRequestHeaders.Add("Accept-Language", "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7");
         }
     }
 }
