@@ -71,6 +71,12 @@ namespace ParseTry.DBWorker
                     skin.buff_buy_num = item.buff_buy_num;
                     skin.buff_sell_num = item.buff_sell_num;
                     skin.market_popularity_7d = item.market_popularity_7d;
+                    skin.pricesBM = item.pricesBM;
+                    skin.pricesMB = item.pricesMB;
+                    skin.pricesBS = item.pricesBS;
+                    skin.pricesSB = item.pricesSB;
+                    skin.pricesSM = item.pricesSM;
+                    skin.pricesMS = item.pricesMS;
                 }
                 else
                 {
