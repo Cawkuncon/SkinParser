@@ -20,7 +20,7 @@ namespace ParseTry
 
             CollectorClass.AggressiveCollectAllGen();
 
-            var buffprsr = new ParserBuff(0.1M, 20000, "session=1-JtWI5txpxqjGtRcZjTLaDmSfGs2MictS4IRPyPhLgncV2038218285"); // добавить парсинг курса юаня
+            var buffprsr = new ParserBuff(10, 1000, "session=1-7mRPd4lMTC9bvRExKhY6OIoEIN5EOMTirTDSmQMdiH6G2038218285"); // добавить парсинг курса юаня
             buffprsr.TryParseInitialization();
 
             TransformClass.TransformToResult();

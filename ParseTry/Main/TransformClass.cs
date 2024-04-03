@@ -60,12 +60,12 @@ namespace ParseTry.Main
         private static Dictionary<string, decimal> GetDivisionPrices(ItemBuff buffItem, ItemMarket marketItem)
         {//ЦЕНЫ В РАЗНОЙ ВАЛЮТЕ!!!!!!!!!!!
             Dictionary<string, decimal> resultDict = new Dictionary<string, decimal>();
-            decimal BM = (buffItem.buy_max_price * (decimal)0.975) / marketItem.price;
-            var MB = buffItem.buy_max_price == 0 ? 0 : (marketItem.price * (decimal)0.95) / buffItem.buy_max_price;
-            var SM = (buffItem.steam_price_cny * (decimal)0.87) / marketItem.price;
-            var MS = (marketItem.price * (decimal)0.95) / buffItem.steam_price_cny;
-            var SB = buffItem.buy_max_price == 0 ? 0 : (buffItem.steam_price_cny * (decimal)0.87) / buffItem.buy_max_price;
-            var BS = (buffItem.buy_max_price * (decimal)0.975) / buffItem.steam_price_cny;
+            var BM = buffItem.sell_min_price == 0 ? 0 : (marketItem.price * (decimal)0.95) / buffItem.sell_min_price; 
+            var MB = (buffItem.sell_min_price * (decimal)0.975) / marketItem.price;
+			var SM = (marketItem.price * (decimal)0.95) / buffItem.steam_price_cny; 
+            var MS = (buffItem.steam_price_cny * (decimal)0.87) / marketItem.price;
+            var SB = (buffItem.sell_min_price * (decimal)0.975) / buffItem.steam_price_cny;
+			var BS = buffItem.sell_min_price == 0 ? 0 : (buffItem.steam_price_cny * (decimal)0.87) / buffItem.sell_min_price;
             resultDict.Add("B/M", BM);
             resultDict.Add("M/B", MB);
             resultDict.Add("S/M", SM);

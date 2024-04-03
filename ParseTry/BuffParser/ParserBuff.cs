@@ -9,9 +9,9 @@ namespace ParseTry.BuffParser
     {
         private HttpClient UserHttpClient { get; set; }
         private string Session { get; set; }
-        private ApplicationContext dataBase { get; set; }
         private Uri uri { get; set; }
         private string UrlToParse { get; set; }
+
         private const string Url = "https://buff.163.com/api/market/goods?game=csgo&page_num=";
         private decimal minPrice { get; set; }
         private decimal maxPrice { get; set; }
