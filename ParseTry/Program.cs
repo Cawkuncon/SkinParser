@@ -13,15 +13,15 @@ namespace ParseTry
         static void Main(string[] args)
         {
             CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("en-US");
-            //using (var marketParser = new ParserMarket())
-            //{
-            //    marketParser.Parse();
-            //}
+            using (var marketParser = new ParserMarket())
+            {
+                marketParser.Parse();
+            }
 
-            //CollectorClass.AggressiveCollectAllGen();
+            CollectorClass.AggressiveCollectAllGen();
 
-            //var buffprsr = new ParserBuff(10, 1000, "session=1-7mRPd4lMTC9bvRExKhY6OIoEIN5EOMTirTDSmQMdiH6G2038218285"); // добавить парсинг курса юаня
-            //buffprsr.TryParseInitialization();
+            var buffprsr = new ParserBuff(10, 1000, "session=1-7mRPd4lMTC9bvRExKhY6OIoEIN5EOMTirTDSmQMdiH6G2038218285"); // добавить парсинг курса юаня
+            buffprsr.TryParseInitialization();
 
             TransformClass.TransformToResult();
         }
