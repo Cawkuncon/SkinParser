@@ -68,7 +68,7 @@ namespace ParseTry.MarketParser
             foreach (var skin in itemsInfo)
             {
                 skinInfo.price = skin.price < skinInfo.price ? skin.price : skinInfo.price;
-                skinInfo.buy_order = skin.buy_order < skinInfo.buy_order ? skin.buy_order : skinInfo.buy_order;
+                skinInfo.buy_order = MarketHelper.OrderChanger(skin.buy_order, skinInfo.buy_order);
                 skinInfo.avg_price = skin.avg_price ?? skinInfo.avg_price;
                 skinInfo.popularity_7d += skin.popularity_7d ?? 1;
             }
