@@ -14,9 +14,12 @@ namespace ParseTry.Main
 		private static decimal? GetCnyRubValue()
 		{
 			var data = new HttpClient().GetStringAsync("https://www.cbr-xml-daily.ru/daily_json.js").Result;
-			JObject.Parse(data).TryGetValue("Valute", out JToken valutes);
-			IEnumerable<Currencies> listCurrency = valutes.Select(val => JsonConvert.DeserializeObject<Currencies>(val.First.ToString()));
-			return listCurrency.Where(val => val.CharCode == "CNY").FirstOrDefault().Value;
+			if (JObject.Parse(data).TryGetValue("Valute", out JToken valutes))
+			{
+				IEnumerable<Currencies> listCurrency = valutes.Select(val => JsonConvert.DeserializeObject<Currencies>(val.First.ToString()));
+				return listCurrency.Where(val => val.CharCode == "CNY").FirstOrDefault().Value;
+			}
+			return null;
 		}
 	}
 }
