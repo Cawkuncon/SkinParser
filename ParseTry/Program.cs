@@ -20,7 +20,7 @@ namespace ParseTry
 
             CollectorClass.AggressiveCollectAllGen();
 
-            var buffprsr = new ParserBuff(10, 1000, "session=1-7mRPd4lMTC9bvRExKhY6OIoEIN5EOMTirTDSmQMdiH6G2038218285"); // добавить парсинг курса юаня
+            var buffprsr = new ParserBuff(10, 1000, "session="); //минимальная цена поиска предметов в Юанях, максимальная цена в Юанях, код сессии
             buffprsr.TryParseInitialization();
 
             TransformClass.TransformToResult();
